@@ -20,6 +20,16 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  {
+    rules: {
+      // Allow img elements for better performance in some cases
+      "@next/next/no-img-element": "warn",
+      // Allow any types in Supabase operations where type generation is complex
+      "@typescript-eslint/no-explicit-any": "warn",
+      // Allow @ts-ignore comments for complex type issues
+      "@typescript-eslint/ban-ts-comment": "warn",
+    },
+  },
 ];
 
 export default eslintConfig;

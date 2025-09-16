@@ -8,6 +8,10 @@ type ProgressRow = Database['public']['Tables']['progress']['Row'];
 type VideoInsert = Database['public']['Tables']['videos']['Insert'];
 type ProgressInsert = Database['public']['Tables']['progress']['Insert'];
 
+// Helper types for complex queries
+type StudentWithClass = { class: number };
+type ProgressWithVideos = ProgressRow & { videos?: { duration: number } };
+
 // Get courses by class
 export async function getCoursesByClass(classNum: number): Promise<CourseRow[]> {
   try {
@@ -192,7 +196,7 @@ export async function getStudentStats(studentId: string): Promise<{
     const { data: courses } = await supabase
       .from('courses')
       .select('id')
-      .eq('class', (student as any)?.class || 6);
+      .eq('class', (student as StudentWithClass)?.class || 6);
 
     // Get student's progress
     const { data: progress } = await supabase
@@ -204,13 +208,13 @@ export async function getStudentStats(studentId: string): Promise<{
       .eq('student_id', studentId);
 
     const totalCourses = courses?.length || 0;
-    const completedVideos = progress?.filter((p: any) => p.completed).length || 0;
+    const completedVideos = progress?.filter((p: ProgressWithVideos) => p.completed).length || 0;
     const totalVideos = progress?.length || 0;
     
     // Calculate watch time (completed videos duration)
     const totalWatchTime = progress
-      ?.filter((p: any) => p.completed)
-      .reduce((acc: number, p: any) => acc + (p.videos?.duration || 0), 0) || 0;
+      ?.filter((p: ProgressWithVideos) => p.completed)
+      .reduce((acc: number, p: ProgressWithVideos) => acc + (p.videos?.duration || 0), 0) || 0;
 
     // Calculate completed courses (courses with 100% completion)
     let completedCourses = 0;
@@ -256,7 +260,7 @@ export async function addVideosToCourse(courseId: string, videos: Omit<VideoInse
     // Update course total_videos count
     const { error: updateError } = await supabase
       .from('courses')
-      // @ts-ignore - Supabase type generation issue
+      // @ts-ignore - Complex Supabase type inference issue with update operations
       .update({
         total_videos: videos.length,
         total_duration: videos.reduce((sum, v) => sum + v.duration, 0)

@@ -67,7 +67,7 @@ export async function signUp(email: string, password: string, name: string, sele
 // Sign in existing user
 export async function signIn(email: string, password: string): Promise<AuthResult> {
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });

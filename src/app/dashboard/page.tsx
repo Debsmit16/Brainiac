@@ -101,7 +101,7 @@ export default function Dashboard() {
       case 'progress':
         return <ProgressTracker student={student} />;
       case 'profile':
-        return <StudentProfile student={student} onUpdate={(updatedStudent) => {
+        return <StudentProfile student={student} onUpdate={(updatedStudent: StudentRow) => {
           // In a real app, you would update the student profile in Supabase
           console.log('Profile updated:', updatedStudent);
         }} />;
