@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Student, Course, VideoProgress, CourseProgress } from '@/types';
+import { Student, Course, VideoProgress } from '@/types';
 import {
   getCoursesByClass,
   getCourseProgress
@@ -8,9 +8,7 @@ import {
   BarChart3,
   Clock,
   Trophy,
-  Target,
   Calendar,
-  TrendingUp,
   CheckCircle,
   Play,
   BookOpen

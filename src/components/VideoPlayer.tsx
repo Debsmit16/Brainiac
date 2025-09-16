@@ -29,7 +29,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ student }) => {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [videos, setVideos] = useState<Video[]>([]);
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
-  const [videoProgress, setVideoProgress] = useState<VideoProgress | null>(null);
+  const [videoProgress] = useState<VideoProgress | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -160,14 +160,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ student }) => {
       videoRef.current.volume = 0;
       setIsMuted(true);
     }
-  };
-
-  const skipTime = (seconds: number) => {
-    if (!videoRef.current || !hasAccess) return;
-
-    const newTime = Math.max(0, Math.min(duration, currentTime + seconds));
-    videoRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
   };
 
   const selectVideo = (video: Video) => {

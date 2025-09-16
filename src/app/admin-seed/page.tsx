@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
 import { getCoursesByClass, addVideosToCourse } from '@/lib/supabase-data';
 
 // Sample video templates
@@ -51,7 +50,7 @@ export default function AdminSeedPage() {
 
     const physicsVideos: VideoTemplate[] = [
       { title: 'Motion in Straight Line', description: 'Distance, displacement, velocity, and acceleration', chapter: 'Motion', duration: 2400 },
-      { title: 'Laws of Motion', description: 'Newton\'s three laws of motion and applications', chapter: 'Force and Motion', duration: 2600 },
+      { title: 'Laws of Motion', description: 'Newton&apos;s three laws of motion and applications', chapter: 'Force and Motion', duration: 2600 },
       { title: 'Light and Reflection', description: 'Properties of light and reflection phenomena', chapter: 'Optics', duration: 2200 },
       { title: 'Electricity Basics', description: 'Current, voltage, and resistance in circuits', chapter: 'Electricity', duration: 2500 },
       { title: 'Magnetic Effects', description: 'Magnetism and electromagnetic induction', chapter: 'Magnetism', duration: 2300 },
@@ -221,7 +220,7 @@ export default function AdminSeedPage() {
               <span className="font-semibold text-blue-800 dark:text-blue-200">Supabase Setup</span>
             </div>
             <p className="text-blue-700 dark:text-blue-300 mt-2">
-              Make sure you've run the SQL setup script in your Supabase dashboard before seeding videos.
+              Make sure you&apos;ve run the SQL setup script in your Supabase dashboard before seeding videos.
             </p>
           </div>
         </div>

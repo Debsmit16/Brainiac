@@ -2,13 +2,11 @@ import { supabase } from './supabase';
 import type { Database } from '@/types/supabase';
 
 // Type aliases for cleaner code
-type StudentRow = Database['public']['Tables']['students']['Row'];
 type CourseRow = Database['public']['Tables']['courses']['Row'];
 type VideoRow = Database['public']['Tables']['videos']['Row'];
 type ProgressRow = Database['public']['Tables']['progress']['Row'];
 type VideoInsert = Database['public']['Tables']['videos']['Insert'];
 type ProgressInsert = Database['public']['Tables']['progress']['Insert'];
-type ProgressUpdate = Database['public']['Tables']['progress']['Update'];
 
 // Get courses by class
 export async function getCoursesByClass(classNum: number): Promise<CourseRow[]> {
@@ -194,7 +192,7 @@ export async function getStudentStats(studentId: string): Promise<{
     const { data: courses } = await supabase
       .from('courses')
       .select('id')
-      .eq('class', (student as any).class);
+      .eq('class', (student as any)?.class || 6);
 
     // Get student's progress
     const { data: progress } = await supabase
@@ -258,7 +256,7 @@ export async function addVideosToCourse(courseId: string, videos: Omit<VideoInse
     // Update course total_videos count
     const { error: updateError } = await supabase
       .from('courses')
-      // @ts-ignore - Supabase type inference issue
+      // @ts-ignore - Supabase type generation issue
       .update({
         total_videos: videos.length,
         total_duration: videos.reduce((sum, v) => sum + v.duration, 0)

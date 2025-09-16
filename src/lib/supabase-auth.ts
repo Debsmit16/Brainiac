@@ -7,7 +7,7 @@ type StudentRow = Database['public']['Tables']['students']['Row'];
 export interface AuthResult {
   success: boolean;
   message: string;
-  user?: any;
+  user?: StudentRow | null;
 }
 
 // Sign up new user
@@ -52,7 +52,7 @@ export async function signUp(email: string, password: string, name: string, sele
     return { 
       success: true, 
       message: 'Account created successfully! Please check your email to verify your account.',
-      user: authData.user 
+      user: null 
     };
 
   } catch (error) {
@@ -79,7 +79,7 @@ export async function signIn(email: string, password: string): Promise<AuthResul
     return { 
       success: true, 
       message: 'Login successful!',
-      user: data.user 
+      user: null 
     };
 
   } catch (error) {

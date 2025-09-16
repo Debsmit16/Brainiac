@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
 import DashboardOverview from '@/components/DashboardOverview';
 import CourseManager from '@/components/CourseManager';
-import VideoPlayer from '@/components/VideoPlayer';
 import ProgressTracker from '@/components/ProgressTracker';
 import StudentProfile from '@/components/StudentProfile';
 import { getCurrentUser, signOut, getStudentProfile } from '@/lib/supabase-auth';

@@ -6,7 +6,6 @@ import {
   Play,
   Clock,
   Trophy,
-  TrendingUp,
   Calendar,
   Lock,
   CreditCard

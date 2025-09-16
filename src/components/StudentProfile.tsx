@@ -5,13 +5,10 @@ import {
   Mail,
   BookOpen,
   Calendar,
-  Shield,
   Edit,
   Save,
   X,
-  Clock,
-  Trophy,
-  CreditCard
+  Clock
 } from 'lucide-react';
 
 interface StudentProfileProps {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Student, Course, Video, CourseProgress } from '@/types';
+import { Student, Course, Video } from '@/types';
 import { getCoursesByClass, getVideosByCourse, getCourseProgress } from '@/lib/supabase-data';
 import {
   BookOpen,

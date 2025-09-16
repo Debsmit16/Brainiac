@@ -2,8 +2,6 @@ import { ReactNode } from 'react';
 import { Student } from '@/types';
 import { 
   BookOpen, 
-  Clock, 
-  Trophy, 
   User, 
   Settings, 
   LogOut,
