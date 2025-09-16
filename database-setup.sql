@@ -80,6 +80,10 @@ END;
 $$ language 'plpgsql';
 
 -- Create triggers for updated_at
+DROP TRIGGER IF EXISTS update_students_updated_at ON students;
+DROP TRIGGER IF EXISTS update_courses_updated_at ON courses;
+DROP TRIGGER IF EXISTS update_progress_updated_at ON progress;
+
 CREATE TRIGGER update_students_updated_at BEFORE UPDATE ON students FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_courses_updated_at BEFORE UPDATE ON courses FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_progress_updated_at BEFORE UPDATE ON progress FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
@@ -89,6 +93,16 @@ ALTER TABLE students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE videos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE progress ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Students can view own profile" ON students;
+DROP POLICY IF EXISTS "Students can insert own profile" ON students;
+DROP POLICY IF EXISTS "Students can update own profile" ON students;
+DROP POLICY IF EXISTS "Anyone can view courses" ON courses;
+DROP POLICY IF EXISTS "Anyone can view videos" ON videos;
+DROP POLICY IF EXISTS "Students can view own progress" ON progress;
+DROP POLICY IF EXISTS "Students can insert own progress" ON progress;
+DROP POLICY IF EXISTS "Students can update own progress" ON progress;
 
 -- Students can only access their own profile
 CREATE POLICY "Students can view own profile" ON students FOR SELECT USING (auth.uid() = id);
