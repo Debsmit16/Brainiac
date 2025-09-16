@@ -33,8 +33,16 @@ export default function Login() {
     setMessage(null);
 
     try {
-      await signIn(formData.email, formData.password);
-      router.push('/dashboard');
+      const result = await signIn(formData.email, formData.password);
+      
+      if (result.success) {
+        router.push('/dashboard');
+      } else {
+        setMessage({
+          type: 'error',
+          text: result.message
+        });
+      }
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Invalid email or password. Please try again.';
       setMessage({

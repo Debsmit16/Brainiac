@@ -92,6 +92,7 @@ ALTER TABLE progress ENABLE ROW LEVEL SECURITY;
 
 -- Students can only access their own profile
 CREATE POLICY "Students can view own profile" ON students FOR SELECT USING (auth.uid() = id);
+CREATE POLICY "Students can insert own profile" ON students FOR INSERT WITH CHECK (auth.uid() = id);
 CREATE POLICY "Students can update own profile" ON students FOR UPDATE USING (auth.uid() = id);
 
 -- Anyone can read courses and videos (for browsing)
